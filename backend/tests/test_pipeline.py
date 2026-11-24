@@ -32,8 +32,11 @@ def setup_data_dir():
             import app.services.series_export as se
             import app.services.series_quality as sq
             import app.services.series_snapshot as ss
+            import app.services.ingest_ledger as il
             for mod in [sp, eb, uc, ta, gf, ds, rw, si, ts, sl, se, sq, ss]:
                 mod.DATA_ROOT = Path(tmp)
+            # 接收台账在类实例化时解析 DATA_ROOT，需要同步替换模块路径
+            il.DATA_ROOT = Path(tmp)
             yield Path(tmp)
 
 
